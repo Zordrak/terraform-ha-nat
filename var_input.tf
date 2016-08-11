@@ -1,41 +1,51 @@
-variable "ami_id" {
-  type        = "string"
-  description = "AMI ID to use for NAT ASG Launch Configuration"
+variable "availability_zones" {
+  type        = "list"
+  default     = []
+  description = "List of Availability Zones for NAT Subnets"
 }
 
 variable "aws_region" {
   type        = "string"
-  description = "AWS Region"
+  description = "AWS region"
 }
 
-variable "environment" {
+variable "name" {
   type        = "string"
-  description = "Environment Name"
-}
-
-variable "instance_type" {
-  type        = "string"
-  default     = "t2.micro"
-  description = "instance_type to use for HA-NAT instances"
-}
-
-variable "project" {
-  type        = "string"
-  description = "Project Name"
-}
-
-variable "route_table_id" {
-  type        = "string"
-  description = "Route table ID for the NAT subnets. Should be a public table with a default route to an IGW"
+  description = "NAT name. Synonymous with Role and Nodetype. Used to populate Role and Nodetype tag as well as define resource names and Name tags"
+  default     = "ha-nat"
 }
 
 variable "subnets_cidr" {
   type        = "list"
-  description = "List of CIDR blocks for HA-NAT subnets"
   default     = []
+  description = "List of CIDR blocks for NAT subnets"
+}
+
+variable "subnets_map_public_ip_on_launch" {
+  type        = "string"
+  default     = "0"
+  description = "If you change this to true, you're probably doing it wrong"
+}
+
+variable "subnets_route_tables" {
+  type        = "list"
+  description = "List of (hopefully public!) route table IDs to associate with the subnets"
+  default     = []
+}
+
+variable "tags" {
+  type = "map"
+
+  default = {
+    Environment = ""
+    Application = ""
+    Tier        = ""
+  }
+
+  description = "Tags to apply to all components within the microservice"
 }
 
 variable "vpc_id" {
   type        = "string"
-  description = "VPC ID"
+  description = "Parent VPC ID"
 }
