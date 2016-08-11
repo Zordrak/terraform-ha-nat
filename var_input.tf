@@ -9,6 +9,12 @@ variable "aws_region" {
   description = "AWS region"
 }
 
+variable "gateway_route_tables" {
+  type        = "list"
+  description = "List of (hopefully private!) route tables for which to set NAT gateways as default routes"
+  default     = []
+}
+
 variable "name" {
   type        = "string"
   description = "NAT name. Synonymous with Role and Nodetype. Used to populate Role and Nodetype tag as well as define resource names and Name tags"
