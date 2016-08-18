@@ -9,7 +9,7 @@ variable "aws_region" {
   description = "AWS region"
 }
 
-variable "gateway_route_tables" {
+variable "nat_route_tables" {
   type        = "list"
   description = "List of (hopefully private!) route tables for which to set NAT gateways as default routes"
   default     = []
@@ -21,7 +21,7 @@ variable "name" {
   default     = "ha-nat"
 }
 
-variable "subnets_cidr" {
+variable "subnets_cidrs" {
   type        = "list"
   default     = []
   description = "List of CIDR blocks for NAT subnets"
